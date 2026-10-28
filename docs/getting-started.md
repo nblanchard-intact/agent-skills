@@ -18,7 +18,7 @@ Each skill is a Markdown file (`SKILL.md`) that describes a specific engineering
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/addyosmani/agent-skills.git
+git clone https://github.com/nblanchard-intact/agent-skills.git
 ```
 
 ### 2. Choose a skill
@@ -160,13 +160,11 @@ The `references/` directory contains supplementary checklists:
 
 Load a reference when you need detailed patterns beyond what the skill covers.
 
-If you install one skill with `npx skills add ... --skill <name>`, only the
-selected `skills/<name>/` directory is copied. The skill still works, but paths
-to supplementary checklists in the repo-level `references/` directory are
-unavailable. Use a whole-repo integration, clone the repository, or copy the
-needed checklist into a `references/` directory inside the installed skill.
-This portability gap is tracked in
-[addyosmani/agent-skills#361](https://github.com/addyosmani/agent-skills/issues/361).
+If you install a single skill by copying only `skills/<name>/`, paths to
+supplementary checklists in the repo-level `references/` directory are
+unavailable. Use a whole-repo integration, symlink or copy the repository, or
+copy the needed checklist into a `references/` directory inside the installed
+skill.
 
 ## Spec and task artifacts
 
@@ -193,7 +191,7 @@ The same artifacts are the handoff between sessions. For a small task, run the w
 
 A shell-level "Ralph loop" is harness behavior, not a separate skill workflow. If you use one, restart only after the current task has reached a recorded boundary; on re-entry, read the durable artifacts and repository state before selecting the next pending task. A process exit is not evidence that a task passed, and a restart must not bypass an approval gate. See the `context-engineering` skill's **Restartable Session Boundaries** section for the handoff checklist.
 
-This doesn't need the `/spec` and `/plan` wrappers — plain requests work in any agent, including a `npx skills add` install that only has the skills:
+This doesn't need the `/spec` and `/plan` wrappers — plain requests work in any agent, including an install that has only the skills:
 
 > Read SPEC.md, then break it into small verifiable tasks with acceptance criteria and dependency order. Save them to tasks/plan.md and tasks/todo.md. No product code yet — show me the plan first.
 
